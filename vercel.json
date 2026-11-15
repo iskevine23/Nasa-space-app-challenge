@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/ingest/power?lat=-1.94&lon=30.06",
+      "schedule": "0 6 * * *"
+    }
+  ]
+}
