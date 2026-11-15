@@ -1,5 +1,7 @@
-// Farmer-friendly translations of technical signals
+// Farmer-friendly translations — one language at a time, no mixing
 // Kinyarwanda + English + French, plain language
+
+export type Lang = "rw" | "en" | "fr";
 
 export type FarmerStatus = {
   level: "good" | "watch" | "bad";
@@ -12,6 +14,12 @@ export type FarmerStatus = {
   adviceEn: string;
   adviceFr: string;
 };
+
+export function localizedStatus(s: FarmerStatus, lang: Lang) {
+  if (lang === "rw") return { title: s.kiny, advice: s.adviceKiny };
+  if (lang === "fr") return { title: s.fr, advice: s.adviceFr };
+  return { title: s.en, advice: s.adviceEn };
+}
 
 export function toFarmerStatus(drought: any, flood: any): FarmerStatus {
   // handle null/undefined gracefully
