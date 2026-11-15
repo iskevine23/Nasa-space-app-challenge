@@ -199,18 +199,6 @@ export default async function Page() {
         </div>
       </div>
 
-      {/* Rwanda crop calendar - relevance */}
-      <div className="card border-2 border-orange-100 overflow-hidden">
-        <h2 className="font-black text-[#92400e]">📅 Rwanda crop calendar — when to act (Season A/B/C)</h2>
-        <p className="text-xs text-stone-500 mt-1">Not California — Rwanda has 3 seasons. We time advice to yours.</p>
-        <div className="mt-4 grid md:grid-cols-3 gap-3 text-xs">
-          <div className="p-4 bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl"><div className="font-black">Season A • Sep → Jan</div><div className="text-stone-600 mt-1">Long rains — main maize & beans</div><div className="mt-2 flex flex-wrap gap-1"><span className="pill bg-white">🌽 maize 120d</span><span className="pill bg-white">🫘 beans 90d</span><span className="pill bg-white">🥔 potato</span></div><div className="mt-2 p-2 bg-white rounded-xl">This week (Oct): <b className="text-emerald-700">Weed + watch for armyworm</b> — satellite says Bugesera dry? Mulch now.</div></div>
-          <div className="p-4 bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-200 rounded-2xl"><div className="font-black text-sky-900">Season B • Feb → Jun</div><div className="text-stone-600 mt-1">Short rains — 2nd chance</div><div className="mt-2 flex flex-wrap gap-1"><span className="pill bg-white">🌽 maize</span><span className="pill bg-white">🍚 rice (marsh)</span><span className="pill bg-white">🍠 cassava</span></div><div className="mt-2 p-2 bg-white rounded-xl">Next decision (Feb): <b className="text-sky-700">Check POWER 30d rain — if &lt;50mm, don’t plant yet</b></div></div>
-          <div className="p-4 bg-stone-50 border border-stone-200 rounded-2xl"><div className="font-black">Season C • Jul → Aug</div><div className="text-stone-600 mt-1">Dry — only marshlands + hillside irrigation</div><div className="mt-2 flex flex-wrap gap-1"><span className="pill bg-white">🥬 veg</span><span className="pill bg-white">🍅 tomato</span></div><div className="mt-2 p-2 bg-white rounded-xl">Now: <b>Musanze potato harvest — dry & store well</b> — 0% soil? Good! Save water.</div></div>
-        </div>
-        <div className="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-xs text-emerald-900">💡 <b>Live link:</b> Our traffic light uses your <b>crop + season</b>. Example: 30mm rain is Good for beans (needs 300mm) but Watch for rice (needs 1000mm) — we adjust.</div>
-      </div>
-
       {/* EONET simplified */}
       <div className="grid lg:grid-cols-3 gap-4">
         <div className="lg:col-span-2 card">
