@@ -28,7 +28,9 @@ export function assessDrought(series: PowerPoint[], baseline?: { p30median?: num
   else if (p30 < 50) { score += 12; reasons.push(`Below-average 30-day rainfall: ${p30.toFixed(1)} mm`); }
 
   if (wet != null && wet < 0.3) { score += 20; reasons.push(`Topsoil wetness low (GWETTOP ${(wet*100).toFixed(0)}%)`); }
+  else if (wet == null) { reasons.push(`Soil moisture data missing — advice based on rain & temp only`); }
   if (tAvg != null && tAvg > 27) { score += 10; reasons.push(`High mean temp ${tAvg.toFixed(1)}°C — evapotranspiration stress`); }
+  else if (tAvg == null) { reasons.push(`Temperature data missing for some days`); }
 
   if (score < 20) return { level: "normal", score, reasons: reasons.length?reasons:["Conditions near normal"] };
   if (score < 40) return { level: "watch", score, reasons };

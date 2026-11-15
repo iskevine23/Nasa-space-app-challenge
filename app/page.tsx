@@ -32,12 +32,14 @@ function FarmerCard({ title, subtitle, v }: { title: string; subtitle: string; v
     </div>
   );
   const farmer = toFarmerStatus(v.drought, v.flood);
-  const p7 = (v.series || []).slice(-7).reduce((a:number,r:any)=>a+(r.PRECTOTCORR||0),0);
-  const p30 = (v.series || []).slice(-30).reduce((a:number,r:any)=>a+(r.PRECTOTCORR||0),0);
+  const p7 = (v.series || []).slice(-7).reduce((a:number,r:any)=>a+(r.PRECTOTCORR??0),0);
+  const p30 = (v.series || []).slice(-30).reduce((a:number,r:any)=>a+(r.PRECTOTCORR??0),0);
   const story = simpleRainStory(v.flood?.p3 || 0, p7, p30);
   const wet = v.series?.at(-1)?.GWETTOP;
   const soil = soilStory(wet);
-  const tAvg = ((v.series || []).slice(-7).reduce((a:number,r:any)=>a+(r.T2M||0),0)/7 || 0).toFixed(0);
+  const tVals = (v.series || []).slice(-7).map((r:any)=>r.T2M).filter((v:any)=>v!=null);
+  const tAvgNum = tVals.length ? tVals.reduce((a:number,b:number)=>a+b,0)/tVals.length : null;
+  const tAvg = tAvgNum == null ? "—" : tAvgNum.toFixed(0);
 
   return (
     <div className="card hover:shadow-md transition">

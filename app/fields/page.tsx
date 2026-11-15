@@ -69,11 +69,27 @@ export default function FieldsPage() {
             <div className="text-xs text-stone-600">{meta.drought?.reasons?.[0] || "Checking conditions…"}</div>
           </div>
         </div>
-        <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-          <div className="bg-white rounded-2xl p-2"><div className="text-xs text-stone-500">🌧️ {tr.rain}</div><div className="font-bold text-sm">{rows.slice(-7).reduce((a,r)=>a+(r.PRECTOTCORR||0),0).toFixed(0)}mm</div><div className="text-[11px] text-stone-500">7 days</div></div>
-          <div className="bg-white rounded-2xl p-2"><div className="text-xs text-stone-500">💧 {tr.soil}</div><div className="font-bold text-sm">{Math.round((rows.at(-1)?.GWETTOP||0)*100)}%</div><div className="text-[11px] text-stone-500">moist</div></div>
-          <div className="bg-white rounded-2xl p-2"><div className="text-xs text-stone-500">🌡️ Temp</div><div className="font-bold text-sm">{(rows.slice(-7).reduce((a,r)=>a+(r.T2M||0),0)/7).toFixed(0)}°C</div><div className="text-[11px] text-stone-500">avg</div></div>
-        </div>
+        {(() => {
+          const p7 = rows.slice(-7).reduce((a:any,r:any)=>a+(r.PRECTOTCORR??0),0);
+          const lastWet = (rows as any).at(-1)?.GWETTOP;
+          const soilDisplay = lastWet == null ? "—" : Math.round(lastWet*100)+"%";
+          const soilSub = lastWet == null ? "no data" : "moist";
+          const tVals = rows.slice(-7).map((r:any)=>r.T2M).filter((v:any)=>v!=null);
+          const tAvg = tVals.length ? (tVals.reduce((a:number,b:number)=>a+b,0)/tVals.length) : null;
+          const tempDisplay = tAvg == null ? "—" : tAvg.toFixed(0)+"°C";
+          const missingSoil = lastWet == null;
+          const missingTemp = tAvg == null;
+          return (
+            <>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+                <div className="bg-white rounded-2xl p-2"><div className="text-xs text-stone-500">🌧️ {tr.rain}</div><div className="font-bold text-sm">{p7.toFixed(0)}mm</div><div className="text-[11px] text-stone-500">7 days</div></div>
+                <div className={`bg-white rounded-2xl p-2 ${missingSoil ? "opacity-60 border border-dashed border-amber-300" : ""}`}><div className="text-xs text-stone-500">💧 {tr.soil}</div><div className="font-bold text-sm">{soilDisplay}</div><div className="text-[11px] text-stone-500">{soilSub}</div></div>
+                <div className={`bg-white rounded-2xl p-2 ${missingTemp ? "opacity-60" : ""}`}><div className="text-xs text-stone-500">🌡️ Temp</div><div className="font-bold text-sm">{tempDisplay}</div><div className="text-[11px] text-stone-500">avg</div></div>
+              </div>
+              {(missingSoil || missingTemp) && <div className="mt-2 text-[11px] text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-2 text-center">⚠️ {missingSoil ? "Soil sensor missing today — " : ""}{missingTemp ? "Temp incomplete — " : ""}advice uses rain only. Check field visually.</div>}
+            </>
+          );
+        })()}
         <div className="mt-3 bg-white rounded-2xl p-3 border border-stone-100">
           <div className="text-xs font-black">👉 {tr.whatToDo}</div>
           <div className="text-sm mt-1">{isGood ? (lang==="rw"?"Komeza neza, fata ifoto buri cyumweru.":"Keep going, photo each week.") : isWatch ? (lang==="rw"?"Humbika ubutaka, vomeera mu gitondo.":"Mulch, water morning.") : (lang==="rw"?"Vugana n'umujyanama, ntahingire ifumbire.":"Talk to agronomist, no fertilizer.")}</div>
@@ -108,6 +124,12 @@ export default function FieldsPage() {
           <form onSubmit={create} className="mt-5 p-4 bg-stone-50 rounded-2xl space-y-3 text-sm border border-stone-100">
             <div className="font-black">➕ {tr.addField}</div>
             <input placeholder={tr.name + " e.g. Bugesera plot 2"} value={form.name} onChange={e=>setForm({...form, name:e.target.value})} className="w-full border border-stone-200 rounded-full px-4 py-3" required />
+            <div className="flex flex-wrap gap-1">
+              <button type="button" onClick={()=>setForm({...form, lat:"-1.498", lon:"29.636"})} className="text-[11px] px-3 py-1 rounded-full border bg-emerald-50 border-emerald-200">📍 Musanze (-1.498, 29.636)</button>
+              <button type="button" onClick={()=>setForm({...form, lat:"-1.94", lon:"30.06"})} className="text-[11px] px-3 py-1 rounded-full border bg-stone-50">Kigali</button>
+              <button type="button" onClick={()=>setForm({...form, lat:"-2.15", lon:"30.25"})} className="text-[11px] px-3 py-1 rounded-full border bg-stone-50">Bugesera</button>
+              <button type="button" onClick={()=>setForm({...form, lat:"-1.30", lon:"30.32"})} className="text-[11px] px-3 py-1 rounded-full border bg-stone-50">Nyagatare</button>
+            </div>
             <div className="grid grid-cols-2 gap-2">
               <select value={form.crop} onChange={e=>setForm({...form, crop:e.target.value})} className="border border-stone-200 rounded-full px-3 py-3"><option>maize</option><option>beans</option><option>rice</option><option>cassava</option></select>
               <input value={form.area_ha} onChange={e=>setForm({...form, area_ha:e.target.value})} className="border border-stone-200 rounded-full px-3 py-3" placeholder="ha" />
