@@ -23,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/" className="btn-ghost !px-3 !py-2">🏠 Home</Link>
               <Link href="/fields" className="btn-ghost !px-3 !py-2">🌾 My Fields</Link>
               <Link href="/map" className="btn-ghost !px-3 !py-2">🗺️ Map</Link>
+              <Link href="/pitch" className="btn-ghost !px-3 !py-2 bg-amber-50 border-amber-200">🏆 Pitch</Link>
               <Link href="/docs" className="hidden md:inline-flex btn-ghost !px-3 !py-2 text-stone-500">Docs</Link>
               <Link href="/map" className="hidden sm:inline-flex btn ml-1">See my farm →</Link>
             </nav>
