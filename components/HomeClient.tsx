@@ -71,7 +71,7 @@ export default function HomeClient({ kigali, bugesera, nyagatare, eonet }: any) 
         <div className="card py-4 text-center border-2 border-emerald-100"><div className="text-2xl">🌾</div><div className="font-black text-lg">1.6M</div><div className="text-xs text-stone-500">{t("home.impact_smallholders")}<br/><span className="text-emerald-700 font-bold">{t("home.impact_hunger")}</span></div></div>
         <div className="card py-4 text-center border-2 border-sky-100"><div className="text-2xl">🛰️</div><div className="font-black text-lg">55km → 3m</div><div className="text-xs text-stone-500">{t("home.impact_satellite")}<br/><span className="text-sky-700 font-bold">{t("home.impact_satellite_sub")}</span></div></div>
         <div className="card py-4 text-center border-2 border-amber-100"><div className="text-2xl">💰</div><div className="font-black text-lg">$90 / ha</div><div className="text-xs text-stone-500">{t("home.impact_saved")}<br/><span className="text-amber-700 font-bold">{t("home.impact_saved_sub")}</span></div></div>
-        <div className="card py-4 text-center border-2 border-stone-200 bg-stone-900 text-white border-stone-800"><div className="text-xs bg-white/10 inline-block px-2 py-1 rounded-full">NASA Space Apps Kigali</div><div className="font-black text-sm mt-1">{t("home.impact_judge")}</div><Link href="/pitch" className="mt-2 inline-block bg-amber-400 text-stone-900 px-4 py-2 rounded-full font-black text-xs">{t("home.impact_judge_btn")}</Link></div>
+        <div className="card py-4 text-center border-2 border-stone-200 bg-stone-900 text-white border-stone-800"><div className="text-xs bg-white/10 inline-block px-2 py-1 rounded-full">NASA Space Apps Kigali</div><div className="font-black text-sm mt-1">{t("home.impact_judge")}</div><Link href="/for-judges" className="mt-2 inline-block bg-amber-400 text-stone-900 px-4 py-2 rounded-full font-black text-xs">{t("home.impact_judge_btn")}</Link></div>
       </div>
 
       {/* HERO */}
@@ -85,7 +85,7 @@ export default function HomeClient({ kigali, bugesera, nyagatare, eonet }: any) 
             <div className="mt-4 flex flex-wrap gap-2">
               <Link href="/fields" className="bg-white text-[#166534] px-6 py-3 rounded-full font-black text-sm shadow">{t("home.hero_cta_fields")}</Link>
               <Link href="/map" className="bg-white/15 backdrop-blur border border-white/20 text-white px-5 py-3 rounded-full font-semibold text-sm">{t("home.hero_cta_map")}</Link>
-              <Link href="/pitch" className="bg-amber-400 text-stone-900 px-5 py-3 rounded-full font-black text-sm">🏆 Pitch</Link>
+              <Link href="/for-judges" className="bg-amber-400 text-stone-900 px-5 py-3 rounded-full font-black text-sm">🏆 Pitch</Link>
             </div>
             <div className="mt-4 flex gap-2 text-xs flex-wrap">
               <span className="bg-white/10 border border-white/20 px-3 py-1 rounded-full">{t("home.hero_location")}</span>

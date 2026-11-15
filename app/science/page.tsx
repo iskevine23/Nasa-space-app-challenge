@@ -13,7 +13,7 @@ export default function Science() {
           <p className="text-white/80 text-sm mt-2 max-w-[720px]">NASA judges value truth over hype. Every advisory in Ubuhinzi Sentinel carries <b className="text-white">Source • Resolution • Latency • Confidence • “What we got wrong”</b>. You caught our 0% lie — this is how we fixed it systemically.</p>
           <div className="mt-4 flex gap-2 text-xs flex-wrap">
             <span className="bg-white text-stone-900 px-3 py-1.5 rounded-full font-bold">✅ You found: 46mm + Growing well! + 0% soil + 11°C → FIXED e33c048</span>
-            <Link href="/pitch" className="bg-white/10 border border-white/20 px-3 py-1.5 rounded-full">🏆 Pitch →</Link>
+            <Link href="/for-judges" className="bg-white/10 border border-white/20 px-3 py-1.5 rounded-full">🏆 Pitch →</Link>
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default function Science() {
 
       <div className="card bg-gradient-to-br from-emerald-50 to-sky-50 border-emerald-200 text-center">
         <div className="font-black text-lg">Ready to be wrong — loudly.</div>
-        <div className="text-sm text-stone-600 mt-1 max-w-[640px] mx-auto">Science isn’t “we’re accurate”. Science is “we know our error bars and we show them”. Your catch made us better — that’s validity. <Link href="/docs" className="underline">Docs</Link> • <Link href="/pitch" className="underline">Pitch</Link> • <Link href="/" className="underline">Home</Link></div>
+        <div className="text-sm text-stone-600 mt-1 max-w-[640px] mx-auto">Science isn’t “we’re accurate”. Science is “we know our error bars and we show them”. Your catch made us better — that’s validity. <Link href="/docs" className="underline">Docs</Link> • <Link href="/for-judges" className="underline">Pitch</Link> • <Link href="/" className="underline">Home</Link></div>
       </div>
     </div>
   );
