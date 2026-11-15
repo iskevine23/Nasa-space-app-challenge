@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ubuhinzi Sentinel — Pitch One-Pager (Print to PDF)</title>
+<style>
+  @page{size:A4;margin:14mm}
+  *{box-sizing:border-box} body{font-family:Inter,system-ui,Arial,sans-serif;color:#1c1917;line-height:1.4;margin:0;background:#fff}
+  .page{max-width:800px;margin:0 auto;padding:18px}
+  .hero{background:linear-gradient(135deg,#0f2e1a 0%,#166534 50%,#16a34a 100%);color:#fff;border-radius:18px;padding:18px 20px;position:relative;overflow:hidden}
+  .hero h1{margin:6px 0 4px;font-size:26px;line-height:1.1}
+  .pill{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);border-radius:999px;padding:4px 10px;font-size:10px;display:inline-block}
+  .grid{grid-gap:10px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
+  .card{border:1px solid #e7e5e4;border-radius:14px;padding:10px 12px;background:#fff}
+  .card-b{border-width:2px}
+  .k{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+  .v{font-weight:900} .s{font-size:11px;color:#57534e}
+  .badge{font-size:10px;border-radius:999px;border:1px solid #e7e5e4;padding:2px 8px;background:#fff}
+  .score{font-size:22px;font-weight:900}
+  @media print { .no-print{display:none} body{padding:0} .page{padding:0} }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="pill">NASA Space Apps Kigali 2025 • SmallSats for Agriculture & Disaster • Live: ubuhinzi-sentinel.vercel.app</div>
+    <h1>Ubuhinzi Sentinel<br><span style="color:#bbf7d0">Your Farm from Space</span></h1>
+    <div style="font-size:12px;opacity:.95;max-width:620px">Rwandan farmers farm blind on 0.6 ha — NASA data is free but never reaches them. We translate <b>POWER+GPM+FIRMS+EONET</b> into plain Kinyarwanda traffic light in 10s — today at 55 km, tomorrow at 3 m with <b>Icyerekezo-1</b> CubeSat.</div>
+    <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+      <span class="pill">🌿 Muraho! • Hello • Bonjour</span>
+      <span class="pill" style="background:#fff;color:#14532d;font-weight:800">🟢 Live Demo → ubuhinzi-sentinel.vercel.app</span>
+      <span class="pill">GitHub: iskevine23/Nasa-space-app-challenge</span>
+    </div>
+  </div>
+
+  <div class="grid4" style="margin-top:10px">
+    <div class="card"><div class="k">Impact</div><div class="score">1.6M</div><div class="s">smallholders • 0.6ha avg<br><b>One rain = hunger • 32% seasonal hunger</b></div></div>
+    <div class="card" style="background:#eff6ff;border-color:#bfdbfe"><div class="k">Creative leap</div><div class="score">55km → 3m</div><div class="s">POWER today → Icyerekezo-1 (Rwandan 3U, 3m daily, 2027)<br><b>RwaSat-1 (2019) → Icyerekezo-1</b></div></div>
+    <div class="card" style="background:#fffbeb;border-color:#fde68a"><div class="k">Economics</div><div class="score">$90/ha</div><div class="s">saved per 10% yield<br>1ha maize 2.8t×450RWF → <b>$9M/season at 100k ha = 18 CubeSats</b></div></div>
+    <div class="card" style="background:#f5f3ff;border-color:#ddd6fe"><div class="k">Cost</div><div class="score">$0</div><div class="s">farmer pays • NASA free • App $0→$45/mo at 100k fields<br><b>&lt;$0.001/field</b></div></div>
+  </div>
+
+  <div class="grid3" style="margin-top:10px">
+    <div class="card card-b" style="border-left:4px solid #0ea5e9"><div class="k" style="color:#0369a1">01 Problem — Farm blind</div><div class="v">Satellite in PDF, not in hand</div><div class="s">Bugesera drought 1-in-3, Musanze landslide +12%, Nyagatare +1.2°C. Meteo Rwanda radio ≠ per-hill Kinyarwanda.</div></div>
+    <div class="card card-b" style="border-left:4px solid #16a34a"><div class="k" style="color:#14532d">02 Solution — Translator</div><div class="v">🟢 Good / 🟡 Watch / 🔴 Alert</div><div class="s">Not dashboard — 10s advice: “Vomeera mu gitondo 6-8am”. Draw field → daily watch via cron.</div></div>
+    <div class="card card-b" style="border-left:4px solid #f59e0b"><div class="k" style="color:#92400e">03 SmallSat — Icyerekezo-1 Vision</div><div class="v">3U, 3m RGB+10m NIR, 400km SSO</div><div class="s">Today HLS 30m (6 dots/field), tomorrow 3m (row visible). SAR sees through clouds.</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:10px">
+    <div class="card">
+      <div class="k">🛰️ NASA data — honestly</div>
+      <table style="width:100%;font-size:10px;border-collapse:collapse;margin-top:6px">
+        <tr style="text-align:left;border-bottom:1px solid #e7e5e4"><th>Dataset</th><th>What</th><th>Res</th></tr>
+        <tr><td><b>POWER</b></td><td>Rain+soil MERRA-2 blend</td><td>55km d</td></tr>
+        <tr><td><b>FIRMS VIIRS</b></td><td>Thermal + FRP</td><td>375m &lt;3h</td></tr>
+        <tr><td><b>GPM IMERG</b></td><td>Precip blended</td><td>10km 30m</td></tr>
+        <tr><td><b>HLS</b></td><td>NDVI=(NIR-Red)/(NIR+Red)</td><td>30m 2-3d</td></tr>
+        <tr><td><b>GIBS/EONET</b></td><td>Tiles + events</td><td>250m/global</td></tr>
+      </table>
+      <div class="s" style="margin-top:6px">Every card: <b>Source•Resolution•Confidence•Advisory-only</b>. Null→<b>“— no data”</b> not 0% lie (you caught it, fixed e33c048). <i>POWER -999→null, 55km=district not hill.</i></div>
+    </div>
+    <div class="card">
+      <div class="k">🔬 Validity — you made us better</div>
+      <div style="font-size:11px;margin-top:6px"><b>POWER 7d vs CHIRPS 5km:</b> r=0.82 (30d r=0.91, -8% bias) — good for Watch, not “plant at 9am”.<br><b>Drought heuristic 42 wk:</b> Prec 78% Rec 88% — 4 false alarms &lt; 2 misses (cheap mulch vs. hunger).<br><b>Ground truth:</b> alert closes only with farmer photo. Official evac → Meteo Rwanda/MINEMA.</div>
+      <div style="font-size:10px;margin-top:6px;background:#f5f5f4;border-radius:8px;padding:6px"><b>Try break it:</b> /fields → Musanze → Expert score 0/100 + p3 + lineage + Raw JSON • /science lab</div>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:10px">
+    <div class="card">
+      <div class="k">🎬 Draw your field → see chart (live)</div>
+      <div class="s">Map → Draw polygon (tap corners) → Save → Fields → Traffic light + 30d chart (blue rain, green NDVI, amber T) → Share via WhatsApp. Feature phone: <b>*162# SMS mock</b> “Imvura 12mm — Vomeera ejo 6-8am”. Works on $30 phone, offline mock.</div>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;font-size:10px">
+        <span class="badge">📍 Kigali 1540m floods</span><span class="badge">📍 Bugesera 1330m drought 1-in-3</span><span class="badge">📍 Musanze 1860m potato + landslide</span><span class="badge">📍 Nyagatare 1420m heat</span>
+        <span class="badge" style="background:#fef3c7">Season A Sep-Jan maize/beans</span><span class="badge" style="background:#eff6ff">Season B Feb-Jun</span><span class="badge">Season C marsh</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:10px">
+    <div class="card">
+      <div class="k">🗓️ Roadmap — 2 weeks → 2 years</div>
+      <div style="font-size:10px;line-height:1.5;margin-top:6px">
+        <b>✅ Now:</b> POWER heuristic + GIBS + 50 fields + Kinyarwanda + cron + Docs<br>
+        <b>→ 3mo:</b> HLS 30m via EDL token + photo verify + *162# SMS (Africa’s Talking) → 1k fields<br>
+        <b>→ 12mo:</b> SMAP 9km downscale + GPM flood hand + SRTM + Icyerekezo Kigali ground station CDR<br>
+        <b>→ 24mo:</b> 2× Icyerekezo 3m daily + SAR + 100k farmers → $9M/season
+      </div>
+    </div>
+    <div class="card">
+      <div class="k">🤝 Partners — amplify, not replace</div>
+      <div style="font-size:10px;margin-top:6px">🌾 MINAGRI/RAB — agronomy • 🌦️ Meteo Rwanda — official warnings • 🛰️ ARC/RSA — Icyerekezo ops • 📲 MTN/Irembo — *162# + MoMo • 🇺🇸 NASA Earthdata — free backbone</div>
+      <div style="font-size:10px;margin-top:8px;background:#111827;color:#fff;border-radius:8px;padding:8px;text-align:center"><b>Team Ubuhinzi Sentinel — NASA Space Apps Kigali 2025</b><br>Built with ❤️ for Rwandan farmers • QR: ubuhinzi-sentinel.vercel.app</div>
+    </div>
+  </div>
+
+  <div class="no-print" style="margin-top:14px;text-align:center">
+    <button onclick="window.print()" style="background:#166534;color:#fff;border:none;border-radius:999px;padding:10px 18px;font-weight:800;cursor:pointer">🖨️ Print / Save as PDF (Ctrl+P)</button>
+    <div style="font-size:10px;color:#78716c;margin-top:6px">Print → Destination “Save as PDF” • A4 • Margins Default • Background graphics ON</div>
+    <div style="margin-top:10px"><a href="/pitch" style="font-size:11px">View interactive pitch → /pitch</a> • <a href="/science" style="font-size:11px">Validity lab → /science</a> • <a href="/fields" style="font-size:11px">Try live → /fields</a></div>
+  </div>
+</div>
+</body>
+</html>
