@@ -3,10 +3,6 @@
     {
       "path": "/api/ingest/power?lat=-1.94&lon=30.06",
       "schedule": "0 6 * * *"
-    },
-    {
-      "path": "/api/ingest/firms",
-      "schedule": "0 */6 * * *"
     }
   ]
 }
