@@ -13,9 +13,11 @@ export type FarmerStatus = {
   adviceFr: string;
 };
 
-export function toFarmerStatus(drought: { level: string; score: number }, flood: { level: string }): FarmerStatus {
-  // Prioritize flood high, then drought
-  if (flood.level === "high") {
+export function toFarmerStatus(drought: any, flood: any): FarmerStatus {
+  // handle null/undefined gracefully
+  const dLevel = drought?.level || "normal";
+  const fLevel = flood?.level || "low";
+  if (fLevel === "high") {
     return {
       level: "bad",
       emoji: "🌊",
@@ -28,7 +30,7 @@ export function toFarmerStatus(drought: { level: string; score: number }, flood:
       adviceFr: "Évitez les champs bas aujourd'hui. Suivez les alertes officielles.",
     };
   }
-  if (flood.level === "elevated") {
+  if (fLevel === "elevated") {
     return {
       level: "watch",
       emoji: "🌧️",
@@ -41,7 +43,7 @@ export function toFarmerStatus(drought: { level: string; score: number }, flood:
       adviceFr: "Préparez le drainage. Visitez votre champ demain.",
     };
   }
-  if (drought.level === "emergency") {
+  if (dLevel === "emergency") {
     return {
       level: "bad",
       emoji: "🥀",
@@ -54,7 +56,7 @@ export function toFarmerStatus(drought: { level: string; score: number }, flood:
       adviceFr: "Arrosez tôt le matin, ne fertilisez pas. Consultez l'agronome.",
     };
   }
-  if (drought.level === "warning") {
+  if (dLevel === "warning") {
     return {
       level: "watch",
       emoji: "🌤️",
@@ -67,7 +69,7 @@ export function toFarmerStatus(drought: { level: string; score: number }, flood:
       adviceFr: "Paillez pour garder l'humidité. Économisez l'eau.",
     };
   }
-  if (drought.level === "watch") {
+  if (dLevel === "watch") {
     return {
       level: "watch",
       emoji: "⛅",

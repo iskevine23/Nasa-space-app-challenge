@@ -17,20 +17,27 @@ async function getPower(lat:number, lon:number) {
 }
 
 function FarmerCard({ title, subtitle, v }: { title: string; subtitle: string; v:any }) {
-  if (v.error) return (
+  if (!v || v.error) return (
     <div className="card">
       <div className="text-sm font-bold">{title}</div>
       <div className="text-xs text-stone-500">{subtitle}</div>
-      <div className="mt-3 p-3 bg-red-50 rounded-2xl text-sm text-red-700">{v.error}</div>
+      <div className="mt-3 p-3 bg-stone-50 rounded-2xl text-sm text-stone-600">{v?.error || "Loading… Gutegereza…"}</div>
+    </div>
+  );
+  if (!v.drought || !v.flood || !v.series) return (
+    <div className="card">
+      <div className="text-sm font-bold">{title}</div>
+      <div className="text-xs text-stone-500">{subtitle}</div>
+      <div className="mt-3 p-3 bg-amber-50 rounded-2xl text-sm text-amber-800">Data not ready — check again in a moment</div>
     </div>
   );
   const farmer = toFarmerStatus(v.drought, v.flood);
-  const p7 = v.series.slice(-7).reduce((a:number,r:any)=>a+(r.PRECTOTCORR||0),0);
-  const p30 = v.series.slice(-30).reduce((a:number,r:any)=>a+(r.PRECTOTCORR||0),0);
-  const story = simpleRainStory(v.flood.p3, p7, p30);
-  const wet = v.series.at(-1)?.GWETTOP;
+  const p7 = (v.series || []).slice(-7).reduce((a:number,r:any)=>a+(r.PRECTOTCORR||0),0);
+  const p30 = (v.series || []).slice(-30).reduce((a:number,r:any)=>a+(r.PRECTOTCORR||0),0);
+  const story = simpleRainStory(v.flood?.p3 || 0, p7, p30);
+  const wet = v.series?.at(-1)?.GWETTOP;
   const soil = soilStory(wet);
-  const tAvg = (v.series.slice(-7).reduce((a:number,r:any)=>a+(r.T2M||0),0)/7).toFixed(0);
+  const tAvg = ((v.series || []).slice(-7).reduce((a:number,r:any)=>a+(r.T2M||0),0)/7 || 0).toFixed(0);
 
   return (
     <div className="card hover:shadow-md transition">
@@ -74,8 +81,8 @@ function FarmerCard({ title, subtitle, v }: { title: string; subtitle: string; v
       <details className="mt-3">
         <summary className="text-xs text-stone-500 cursor-pointer hover:text-stone-700">🔍 Expert details (for advisors)</summary>
         <ul className="mt-2 text-xs text-stone-600 list-disc ml-4 space-y-1 bg-stone-50 p-3 rounded-xl">
-          {v.drought.reasons.map((r:string,i:number)=><li key={i}>{r}</li>)}
-          <li>Flood: {v.flood.level} — {v.flood.note} (3d {v.flood.p3.toFixed(1)} mm)</li>
+          {(v.drought?.reasons || []).map((r:string,i:number)=><li key={i}>{r}</li>)}
+          <li>Flood: {v.flood?.level || "?"} — {v.flood?.note || "…"} (3d {(v.flood?.p3 || 0).toFixed(1)} mm)</li>
         </ul>
       </details>
     </div>

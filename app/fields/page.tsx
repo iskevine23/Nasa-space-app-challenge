@@ -27,10 +27,20 @@ export default function FieldsPage() {
 
   const pick = async (f:any) => {
     setSel(f); setLoading(true);
-    const r = await fetch(`/api/power?lat=${f.lat}&lon=${f.lon}&days=30`);
-    const j = await r.json();
-    setMeta({ drought: j.drought, flood: j.flood, lineage: j.lineage });
-    setRows(j.series || []);
+    try {
+      const r = await fetch(`/api/power?lat=${f.lat}&lon=${f.lon}&days=30`);
+      const j = await r.json();
+      if (j.error) {
+        setMeta({ drought: { level: "normal", score: 0, reasons: ["Data loading…"] }, flood: { level: "low", p3: 0, note: "—" }, lineage: j.error });
+        setRows([]);
+      } else {
+        setMeta({ drought: j.drought || { level: "normal", score: 0, reasons: ["…"] }, flood: j.flood || { level: "low", p3: 0, note: "…" }, lineage: j.lineage });
+        setRows(j.series || []);
+      }
+    } catch (e) {
+      setMeta({ drought: { level: "normal", score: 0, reasons: ["Offline — using last data"] }, flood: { level: "low", p3: 0, note: "…" }, lineage: "" });
+      setRows([]);
+    }
     setLoading(false);
   };
 
@@ -42,8 +52,12 @@ export default function FieldsPage() {
   };
 
   const farmerCard = () => {
-    if (!meta) return null;
-    const level = meta.drought.level;
+    if (!meta || !meta.drought) return (
+      <div className="p-4 rounded-[20px] border-2 bg-stone-50 border-stone-200">
+        <div className="text-sm text-stone-500">Loading advice… Gutegereza…</div>
+      </div>
+    );
+    const level = meta.drought?.level || "normal";
     const isGood = level === "normal";
     const isWatch = level === "watch";
     return (
@@ -52,7 +66,7 @@ export default function FieldsPage() {
           <span className="text-2xl">{isGood ? "🌱" : isWatch ? "🌤️" : "🥀"}</span>
           <div>
             <div className="font-black">{isGood ? (lang==="rw"?"Meze neza!":"Growing well!") : isWatch ? (lang==="rw"?"Witondere":"Watch out") : (lang==="rw"?"Hagira icyo ukora!":"Act now!")}</div>
-            <div className="text-xs text-stone-600">{meta.drought.reasons[0]}</div>
+            <div className="text-xs text-stone-600">{meta.drought?.reasons?.[0] || "Checking conditions…"}</div>
           </div>
         </div>
         <div className="mt-3 grid grid-cols-3 gap-2 text-center">
@@ -120,14 +134,16 @@ export default function FieldsPage() {
                     <div className="mt-2 text-xs text-stone-400 text-center">Green line = plant green-ness • Blue bars = rain • Red = temperature • Simple view — advisor? open details below</div>
                   </>
                 ) : <p className="text-sm text-stone-500">No data</p>}
-                <details className="mt-4">
-                  <summary className="text-xs font-bold text-stone-600 cursor-pointer">🔍 {tr.expert} — drought: {meta?.drought.level} • flood: {meta?.flood.level}</summary>
-                  <div className="mt-2 p-3 bg-stone-50 rounded-2xl text-xs space-y-1">
-                    <div><b>Drought:</b> {meta.drought.level} — {meta.drought.reasons.join(" • ")}</div>
-                    <div><b>Flood:</b> {meta.flood.level} — {meta.flood.note}</div>
-                    <div className="text-stone-400">{meta.lineage?.slice(0,120)}…</div>
-                  </div>
-                </details>
+                {meta && (
+                  <details className="mt-4">
+                    <summary className="text-xs font-bold text-stone-600 cursor-pointer">🔍 {tr.expert} — drought: {meta?.drought?.level || "?"} • flood: {meta?.flood?.level || "?"}</summary>
+                    <div className="mt-2 p-3 bg-stone-50 rounded-2xl text-xs space-y-1">
+                      <div><b>Drought:</b> {meta?.drought?.level || "—"} — {meta?.drought?.reasons?.join(" • ") || "…"}</div>
+                      <div><b>Flood:</b> {meta?.flood?.level || "—"} — {meta?.flood?.note || "…"}</div>
+                      <div className="text-stone-400">{meta?.lineage?.slice(0,120)}…</div>
+                    </div>
+                  </details>
+                )}
               </div>
               <div className="card bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200">
                 <h3 className="font-black">🌱 {tr.whatToDo} — next steps</h3>
