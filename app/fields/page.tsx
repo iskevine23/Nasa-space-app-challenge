@@ -158,11 +158,12 @@ export default function FieldsPage() {
                 ) : <p className="text-sm text-stone-500">No data</p>}
                 {meta && (
                   <details className="mt-4">
-                    <summary className="text-xs font-bold text-stone-600 cursor-pointer">🔍 {tr.expert} — drought: {meta?.drought?.level || "?"} • flood: {meta?.flood?.level || "?"}</summary>
+                    <summary className="text-xs font-bold text-stone-600 cursor-pointer">🔍 {tr.expert} — drought: {meta?.drought?.level || "?"} • flood: {meta?.flood?.level || "?"} — <span className="font-normal text-stone-500">score {meta?.drought?.score ?? "—"}/100</span></summary>
                     <div className="mt-2 p-3 bg-stone-50 rounded-2xl text-xs space-y-1">
                       <div><b>Drought:</b> {meta?.drought?.level || "—"} — {meta?.drought?.reasons?.join(" • ") || "…"}</div>
-                      <div><b>Flood:</b> {meta?.flood?.level || "—"} — {meta?.flood?.note || "…"}</div>
-                      <div className="text-stone-400">{meta?.lineage?.slice(0,120)}…</div>
+                      <div><b>Flood:</b> {meta?.flood?.level || "—"} — {meta?.flood?.note || "…"} (3d {(meta as any)?.flood?.p3?.toFixed?.(1) || "—"}mm)</div>
+                      <div className="text-stone-400">{meta?.lineage?.slice(0,140)}…</div>
+                      <div className="mt-2 p-2 bg-white border rounded-xl"><b className="text-stone-700">Confidence:</b> <span className="text-stone-600">{meta?.lineage?.includes("MOCK") || meta?.lineage==="mock" ? "Mock fallback (sandbox) — real POWER on Vercel" : "NASA POWER MERRA-2 55km daily — regional watch, not field truth. For field, need HLS 30m/Icyerekezo 3m."}</span> • <a href={`/api/power?lat=${sel.lat}&lon=${sel.lon}&days=30`} target="_blank" className="underline">Raw JSON</a> • <a href="/science" className="underline">Validity Lab</a></div>
                     </div>
                   </details>
                 )}
